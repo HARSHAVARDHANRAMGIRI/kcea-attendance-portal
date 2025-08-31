@@ -76,8 +76,8 @@ http://localhost:5000
 
 ## 👨‍💻 Developer
 
-**Harshavardhan Ramgir**
-- GitHub: [@HARSHAVARDHANRAMGIR](https://github.com/HARSHAVARDHANRAMGIR)
+**HARSHAVARDHAN RAMGIRI**
+- GitHub: [@HARSHAVARDHANRAMGIRI](https://github.com/HARSHAVARDHANRAMGIRI)
 
 The static UI is served at `/`.
 
