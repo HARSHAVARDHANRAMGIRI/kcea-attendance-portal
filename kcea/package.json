@@ -1,0 +1,59 @@
+{
+  "name": "kcea-attendance-portal",
+  "version": "1.0.0",
+  "description": "Production-ready attendance management system for KCEA",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:server": "cd apps/server && npm run dev",
+    "build": "npm run build:server && npm run build:web",
+    "build:web": "cd apps/web && npm run build",
+    "build:server": "cd apps/server && npm run build",
+    "start": "npm run start:server",
+    "start:web": "cd apps/web && npm run start",
+    "start:server": "cd apps/server && npm run start",
+    "lint": "npm run lint:web && npm run lint:server",
+    "lint:web": "cd apps/web && npm run lint",
+    "lint:server": "cd apps/server && npm run lint",
+    "type-check": "npm run type-check:web && npm run type-check:server",
+    "type-check:web": "cd apps/web && npm run type-check",
+    "type-check:server": "cd apps/server && npm run type-check",
+    "test": "npm run test:server && npm run test:web",
+    "test:web": "cd apps/web && npm run test",
+    "test:server": "cd apps/server && npm run test",
+    "db:migrate": "cd apps/server && npx prisma migrate dev",
+    "db:seed": "cd apps/server && npx prisma db seed",
+    "db:studio": "cd apps/server && npx prisma studio",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+    "clean:build": "rm -rf apps/*/.next apps/*/dist packages/*/dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/kcea-attendance-portal"
+  },
+  "keywords": [
+    "attendance",
+    "education",
+    "kcea",
+    "nextjs",
+    "express",
+    "prisma",
+    "typescript"
+  ],
+  "author": "KCEA Development Team",
+  "license": "MIT"
+}

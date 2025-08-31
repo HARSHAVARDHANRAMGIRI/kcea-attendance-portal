@@ -1,0 +1,89 @@
+Request ID: d598fad4-299f-4781-8990-f731affb6596
+ConnectError: [aborted] read ECONNRESET
+    at rol.$endAiConnectTransportReportError (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:4869:318559)
+    at tgr._doInvokeHandler (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:211942)
+    at tgr._invokeHandler (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:211684)
+    at tgr._receiveRequest (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:210449)
+    at tgr._receiveOneMessage (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:209271)
+    at M_t.value (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:207365)
+    at we._deliver (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:49:2962)
+    at we.fire (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:49:3283)
+    at Rrt.fire (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:4856:12154)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:7036:18168){% extends 'layout.html' %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-12">
+    <div class="p-4 rounded hero d-flex align-items-center justify-content-between">
+      <div>
+        <h3 class="mb-1">Welcome, {{ student[0] }}</h3>
+        <div class="opacity-75">Roll No: <strong>{{ student[1] }}</strong> • Branch: <strong>{{ student[2] }}</strong></div>
+        <div class="opacity-75">Email: {{ student[3] }}</div>
+      </div>
+      {% if student[4] %}
+      <img src="{{ student[4] }}" class="rounded" style="height:80px;width:80px;object-fit:cover;border:2px solid #fff" />
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <div class="text-muted">Attendance %</div>
+            <div class="fs-2 fw-bold">{{ percent }}%</div>
+          </div>
+          <button id="markBtn" class="btn btn-success" onclick="markAttendance()">Mark Attendance Now</button>
+        </div>
+        <div class="form-text mt-2">Auto records date, time and day.</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="mb-3">Recent Attendance</h5>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Day</th>
+              </tr>
+            </thead>
+            <tbody id="rows">
+              {% for r in records %}
+              <tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2] }}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+async function markAttendance(){
+  const btn = document.getElementById('markBtn');
+  btn.disabled = true; btn.textContent = 'Marking...';
+  const res = await fetch('/api/attendance/mark', { method:'POST' });
+  btn.disabled = false; btn.textContent = 'Mark Attendance Now';
+  const data = await res.json();
+  if(data.ok){
+    // refresh recent entries dynamically
+    const now = new Date();
+    const tr = document.createElement('tr');
+    const date = now.toISOString().slice(0,10);
+    const time = now.toTimeString().slice(0,8);
+    const day = now.toLocaleDateString(undefined, { weekday: 'long' });
+    tr.innerHTML = `<td>${date}</td><td>${time}</td><td>${day}</td>`;
+    const rows = document.getElementById('rows');
+    rows.prepend(tr);
+  } else {
+    alert('Failed to mark attendance');
+  }
+}
+</script>
+{% endblock %}
+
+

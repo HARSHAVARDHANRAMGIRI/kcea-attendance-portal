@@ -1,0 +1,506 @@
+{% extends 'layout.html' %}
+{% set title = "KCEA - Kshatriya College of Engineering" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section mb-5">
+  <div class="row align-items-center">
+    <div class="col-lg-6">
+      <div class="hero-content">
+        <h1 class="display-4 fw-bold text-primary mb-3">Welcome to Kshatriya</h1>
+        <h2 class="h4 text-muted mb-4">Kshatriya College of Engineering</h2>
+        <p class="lead mb-4">Established 2001 • 40 Acres Campus • JNTUH Affiliated • ISO 9001:2008 Certified</p>
+        <div class="d-flex gap-3 mb-4">
+          <a href="/signup" class="btn btn-primary btn-lg px-4">Student Portal</a>
+          <a href="#about" class="btn btn-outline-primary btn-lg px-4">Learn More</a>
+        </div>
+        <div class="d-flex gap-4 text-muted small">
+          <div><i class="fas fa-map-marker-alt"></i> NH-16, 30km from Nizamabad</div>
+          <div><i class="fas fa-university"></i> JNTUH Affiliated</div>
+          <div><i class="fas fa-award"></i> ISO 9001:2008</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+             class="img-fluid rounded-4 shadow-lg"
+             alt="KCEA Campus - Kshatriya College of Engineering"
+             style="max-height: 400px; width: 100%; object-fit: cover;"
+             onerror="this.src='https://via.placeholder.com/800x400/2563eb/ffffff?text=KCEA+Campus'">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Access Cards -->
+<div class="row g-4 mb-5">
+  <div class="col-md-3">
+    <div class="card h-100 border-0 shadow-sm hover-card">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-primary bg-opacity-10 text-primary mb-3 mx-auto">
+          <i class="fas fa-user-graduate fa-2x"></i>
+        </div>
+        <h5 class="card-title">Student Portal</h5>
+        <p class="card-text text-muted">Access attendance, grades, and academic resources</p>
+        <a href="/login" class="btn btn-outline-primary">Login</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card h-100 border-0 shadow-sm hover-card">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-success bg-opacity-10 text-success mb-3 mx-auto">
+          <i class="fas fa-calendar-check fa-2x"></i>
+        </div>
+        <h5 class="card-title">Attendance</h5>
+        <p class="card-text text-muted">Smart attendance tracking system</p>
+        <a href="/signup" class="btn btn-outline-success">Get Started</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card h-100 border-0 shadow-sm hover-card">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-warning bg-opacity-10 text-warning mb-3 mx-auto">
+          <i class="fas fa-book fa-2x"></i>
+        </div>
+        <h5 class="card-title">Academics</h5>
+        <p class="card-text text-muted">Course materials and academic information</p>
+        <a href="#academics" class="btn btn-outline-warning">Explore</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card h-100 border-0 shadow-sm hover-card">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-info bg-opacity-10 text-info mb-3 mx-auto">
+          <i class="fas fa-info-circle fa-2x"></i>
+        </div>
+        <h5 class="card-title">Information</h5>
+        <p class="card-text text-muted">Campus news, events, and announcements</p>
+        <a href="#news" class="btn btn-outline-info">View All</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Section -->
+<section id="about" class="mb-5">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+          <h3 class="card-title text-primary mb-4">About KCEA</h3>
+          <p class="lead">Kshatriya College of Engineering (KCEA) was established in 2001 under the aegis of Pandit Deendayal Upadyay Educational Society. Located on a sprawling 40 acres campus on the serene NH-16 highway, 30 km from Nizamabad district.</p>
+          <p class="mb-4">KCEA is affiliated to Jawaharlal Nehru Technology University Hyderabad (JNTUH) offering graduate programs in engineering and postgraduate programs in Engineering, Business Administration, and Polytechnic.</p>
+          <div class="row g-4 mt-3">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-circle bg-primary bg-opacity-10 text-primary">
+                  <i class="fas fa-desktop"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">Digital Learning</h6>
+                  <p class="text-muted small mb-0">Digital Classrooms, NPTEL Course Material, Digital Library & E-Journals</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-circle bg-success bg-opacity-10 text-success">
+                  <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">100% Placement Assistance</h6>
+                  <p class="text-muted small mb-0">Training & Placement Cell with 1500+ students placed</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-circle bg-warning bg-opacity-10 text-warning">
+                  <i class="fas fa-wifi"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">Modern Infrastructure</h6>
+                  <p class="text-muted small mb-0">NME-ICT 10mbps Internet, Spacious Auditorium, Sports & Games</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-circle bg-info bg-opacity-10 text-info">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">Campus Life</h6>
+                  <p class="text-muted small mb-0">Separate Hostels, Canteen, NCC/NSS, Professional Chapters</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <h5 class="card-title text-primary mb-3">Quick Stats</h5>
+          <div class="stats-list">
+            <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
+              <span class="text-muted">Established</span>
+              <span class="fw-semibold">2001</span>
+            </div>
+            <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
+              <span class="text-muted">Campus Area</span>
+              <span class="fw-semibold">40 Acres</span>
+            </div>
+            <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
+              <span class="text-muted">Students Placed</span>
+              <span class="fw-semibold">1500+</span>
+            </div>
+            <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
+              <span class="text-muted">Companies Visited</span>
+              <span class="fw-semibold">150+</span>
+            </div>
+            <div class="stat-item d-flex justify-content-between align-items-center py-2">
+              <span class="text-muted">Alumni Network</span>
+              <span class="fw-semibold text-success">1500+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Campus Highlights Section -->
+<section id="highlights" class="mb-5">
+  <div class="text-center mb-4">
+    <h3 class="text-primary mb-3">Campus Highlights</h3>
+    <p class="text-muted">Modern facilities and comprehensive support for holistic development</p>
+  </div>
+  <div class="row g-3">
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-desktop text-primary mb-2"></i>
+        <div class="small fw-semibold">Digital Classrooms</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-book text-success mb-2"></i>
+        <div class="small fw-semibold">NPTEL Course Material</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-book-open text-info mb-2"></i>
+        <div class="small fw-semibold">Digital Library & E-Journals</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-users text-warning mb-2"></i>
+        <div class="small fw-semibold">Professional Chapters</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-briefcase text-primary mb-2"></i>
+        <div class="small fw-semibold">100% Placement Assistance</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-wifi text-success mb-2"></i>
+        <div class="small fw-semibold">NME-ICT 10mbps Internet</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-home text-info mb-2"></i>
+        <div class="small fw-semibold">Separate Hostels</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="highlight-card p-3 text-center">
+        <i class="fas fa-utensils text-warning mb-2"></i>
+        <div class="small fw-semibold">Canteen Facility</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Departments Section -->
+<section id="academics" class="mb-5">
+  <div class="text-center mb-5">
+    <h3 class="text-primary mb-3">Academic Departments</h3>
+    <p class="text-muted lead">Comprehensive engineering programs with modern curriculum</p>
+  </div>
+
+
+
+  <!-- Enhanced Departments Grid -->
+  <div class="row g-4">
+    {% set dept_info = {
+      'CSE': {
+        'name': 'Computer Science & Engineering',
+        'icon': 'fas fa-laptop-code',
+        'color': 'primary',
+        'desc': 'AI, Machine Learning, Software Development, Cybersecurity',
+        'students': '500+',
+        'labs': '8'
+      },
+      'CSE(DS)': {
+        'name': 'Computer Science (Data Science)',
+        'icon': 'fas fa-database',
+        'color': 'info',
+        'desc': 'Big Data Analytics, ML, Statistical Computing, Business Intelligence',
+        'students': '200+',
+        'labs': '4'
+      },
+      'ECE': {
+        'name': 'Electronics & Communication',
+        'icon': 'fas fa-microchip',
+        'color': 'warning',
+        'desc': 'IoT, Embedded Systems, VLSI Design, Communication Networks',
+        'students': '400+',
+        'labs': '6'
+      },
+      'MECH': {
+        'name': 'Mechanical Engineering',
+        'icon': 'fas fa-cogs',
+        'color': 'success',
+        'desc': 'Robotics, CAD/CAM, Thermal Engineering, Manufacturing',
+        'students': '350+',
+        'labs': '5'
+      },
+      'CIVIL': {
+        'name': 'Civil Engineering',
+        'icon': 'fas fa-building',
+        'color': 'secondary',
+        'desc': 'Smart Cities, Structural Design, Environmental Engineering',
+        'students': '300+',
+        'labs': '4'
+      },
+      'EEE': {
+        'name': 'Electrical & Electronics',
+        'icon': 'fas fa-bolt',
+        'color': 'danger',
+        'desc': 'Power Systems, Renewable Energy, Control Systems, Smart Grids',
+        'students': '250+',
+        'labs': '5'
+      }
+    } %}
+
+    {% for branch in BRANCHES %}
+    {% set info = dept_info[branch] %}
+    <div class="col-lg-4 col-md-6">
+      <div class="card border-0 shadow-sm hover-card h-100 department-card">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-start gap-3 mb-3">
+            <div class="department-icon-circle bg-{{ info.color }} bg-opacity-10">
+              <i class="{{ info.icon }} fa-2x text-{{ info.color }}"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h5 class="card-title mb-1">{{ branch }}</h5>
+              <p class="text-muted small mb-0">{{ info.name }}</p>
+            </div>
+          </div>
+          <p class="card-text text-muted mb-3">{{ info.desc }}</p>
+          <div class="row g-2 text-center">
+            <div class="col-6">
+              <div class="stat-box">
+                <div class="fw-bold text-{{ info.color }}">{{ info.students }}</div>
+                <div class="small text-muted">Students</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-box">
+                <div class="fw-bold text-{{ info.color }}">{{ info.labs }}</div>
+                <div class="small text-muted">Labs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- News & Events Section -->
+<section id="news" class="mb-5">
+  <div class="row">
+    <div class="col-lg-8">
+      <h3 class="text-primary mb-4">Latest News & Events</h3>
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="news-item border-bottom pb-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="mb-1">First Alumni Meet 2K25</h6>
+                <p class="text-muted small mb-2">Our First Alumni meet 2K25 was a grand success! Watch the highlights video.</p>
+                <span class="badge bg-primary">Alumni</span>
+              </div>
+              <small class="text-muted">1 week ago</small>
+            </div>
+          </div>
+          <div class="news-item border-bottom pb-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="mb-1">New CSD Department Approved</h6>
+                <p class="text-muted small mb-2">TGCHE has officially allotted COMPUTER SCIENCE & DATA SCIENCE (CSD) with 60 seats intake!</p>
+                <span class="badge bg-success">Academic</span>
+              </div>
+              <small class="text-muted">2 weeks ago</small>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="mb-1">Festival Celebrations</h6>
+                <p class="text-muted small mb-2">Ugadi Celebrations 2025 and Sankranti Celebration - 2025 held with great enthusiasm.</p>
+                <span class="badge bg-warning">Events</span>
+              </div>
+              <small class="text-muted">1 month ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <h5 class="text-primary mb-3">Quick Links</h5>
+      <div class="list-group list-group-flush">
+        <a href="/login" class="list-group-item list-group-item-action border-0 px-0">
+          <i class="fas fa-sign-in-alt text-primary me-2"></i>Student Login
+        </a>
+        <a href="/signup" class="list-group-item list-group-item-action border-0 px-0">
+          <i class="fas fa-user-plus text-success me-2"></i>New Registration
+        </a>
+        <a href="https://kcea.in" class="list-group-item list-group-item-action border-0 px-0" target="_blank">
+          <i class="fas fa-globe text-info me-2"></i>Official Website
+        </a>
+        <a href="mailto:info@kcea.in" class="list-group-item list-group-item-action border-0 px-0">
+          <i class="fas fa-envelope text-warning me-2"></i>Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.08), rgba(220, 38, 38, 0.08));
+  border-radius: 20px;
+  margin: 2rem 0;
+  border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e40af, #dc2626);
+  color: white;
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.hover-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(37, 99, 235, 0.1) !important;
+}
+
+.hover-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15) !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+.academic-feature {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.9));
+  backdrop-filter: blur(10px);
+}
+
+.feature-icon {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.department-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.95));
+  backdrop-filter: blur(10px);
+}
+
+.department-icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-box {
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.stats-list .stat-item:last-child {
+  border-bottom: none !important;
+}
+
+.news-item:last-child {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.display-4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1e40af, #dc2626);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lead {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.highlight-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(30, 64, 175, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.highlight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.15);
+  border-color: rgba(30, 64, 175, 0.2);
+}
+
+.highlight-card i {
+  font-size: 1.5rem;
+}
+</style>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}

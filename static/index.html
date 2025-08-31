@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KSHATRIYA COLLEGE OF ENGINEERING • Attendance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #0a66c2; /* KCEA blue */
+        --accent: #ffb703;  /* warm accent */
+        --bg: #0b1220;
+        --card: #121a2b;
+        --text: #e6eef8;
+        --muted: #9bb1d0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; font-family: 'Poppins', sans-serif; background: linear-gradient(180deg, #0b1220, #0f1a33);
+        color: var(--text);
+      }
+      .hero { display: grid; place-items: center; min-height: 80vh; padding: 24px; text-align: center; }
+      .logo { width: 84px; height: 84px; border-radius: 12px; background: #fff; display: grid; place-items: center; margin: 0 auto 16px; overflow: hidden; }
+      .logo img { width: 100%; height: 100%; object-fit: cover; }
+      h1 { margin: 8px 0 4px; font-size: 28px; letter-spacing: 0.5px; }
+      .code { font-weight: 700; color: var(--accent); }
+      p.sub { margin: 0 0 24px; color: var(--muted); }
+      .card {
+        width: min(720px, 92vw);
+        margin: 0 auto;
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+        display: grid; gap: 16px;
+      }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .row.full { grid-template-columns: 1fr; }
+      input, select { width: 100%; background: #0f182a; border: 1px solid #24324d; color: var(--text); padding: 12px 12px; border-radius: 10px; outline: none; }
+      input::placeholder { color: #7f95b4; }
+      button { background: linear-gradient(90deg, var(--primary), #3aa0ff); color: #fff; border: 0; padding: 12px 14px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+      .muted { color: var(--muted); font-size: 13px; }
+      .sep { height: 1px; background: rgba(255,255,255,0.08); margin: 4px 0; }
+      .footer { text-align: center; padding: 16px; color: var(--muted); font-size: 12px; }
+      .sheet { margin-top: 8px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); text-align: left; }
+      th { background: rgba(10, 102, 194, 0.2); }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="logo">
+        <!-- Replace the src with official logo if available locally -->
+        <img alt="KCEA" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png" />
+      </div>
+      <h1>Kshatriya College of Engineering</h1>
+      <p class="sub">CODE: <span class="code">KCEA-B4</span> • Smart Attendance Portal</p>
+
+      <div class="card">
+        <div class="row">
+          <input id="username" placeholder="Username (or Roll No)" />
+          <input id="password" type="password" placeholder="Password (for classic login)" />
+        </div>
+        <div class="row">
+          <button onclick="login()">Login</button>
+          <button onclick="requestOtp()" style="background: linear-gradient(90deg,#ff7b00,#ffb703)">Request OTP</button>
+        </div>
+        <div class="sep"></div>
+        <div class="row">
+          <input id="otp" placeholder="Enter OTP" />
+          <button onclick="verifyOtp()">Verify OTP</button>
+        </div>
+        <p id="status" class="muted"></p>
+
+        <div class="row full">
+          <h3 style="margin: 8px 0">Attendance Sheet (My Courses)</h3>
+          <div class="row">
+            <input id="courseId" placeholder="Course ID" />
+            <button onclick="loadSheet()">Load Sheet</button>
+          </div>
+          <p class="muted" id="live">Live: connecting…</p>
+          <div class="sheet">
+            <table>
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Name</th>
+                  <th>Dept</th>
+                  <th>Class</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="sheetBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">© 2025 KCEA • Built with FastAPI</div>
+
+    <script>
+      let token = null;
+      let ws = null;
+      async function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const body = new URLSearchParams();
+        body.append('username', username);
+        body.append('password', password);
+        const res = await fetch('/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+        const data = await res.json();
+        token = data.access_token; document.getElementById('status').innerText = res.ok ? 'Logged in' : (data.detail || 'Login failed');
+      }
+      async function requestOtp() {
+        const username = document.getElementById('username').value;
+        const res = await fetch('/auth/request-otp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, purpose: 'login' }) });
+        const data = await res.json();
+        document.getElementById('status').innerText = res.ok ? `OTP: ${data.otp} (demo)` : (data.detail || 'Failed to request OTP');
+      }
+      async function verifyOtp() {
+        const username = document.getElementById('username').value;
+        const code = document.getElementById('otp').value;
+        const res = await fetch('/auth/verify-otp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, code, purpose: 'login' }) });
+        const data = await res.json();
+        token = data.access_token; document.getElementById('status').innerText = res.ok ? 'OTP verified' : (data.detail || 'Invalid OTP');
+      }
+      async function loadSheet() {
+        const courseId = document.getElementById('courseId').value;
+        if (!token) { document.getElementById('status').innerText = 'Login first'; return; }
+        const res = await fetch(`/attendance/sheet/${courseId}`, { headers: { Authorization: `Bearer ${token}` } });
+        const rows = await res.json();
+        const body = document.getElementById('sheetBody');
+        body.innerHTML = '';
+        (rows || []).forEach(r => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${r.roll_number || ''}</td><td>${r.full_name || ''}</td><td>${r.department || ''}</td><td>${r.class_name || ''}</td><td>${new Date(r.date).toLocaleString()}</td><td>${r.status}</td>`;
+          body.appendChild(tr);
+        });
+      }
+
+      // Real-time updates via WebSocket
+      function connectWS(){
+        const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+        ws = new WebSocket(`${proto}://${location.host}/ws`);
+        const live = document.getElementById('live');
+        ws.onopen = () => { live.innerText = 'Live: connected'; };
+        ws.onclose = () => { live.innerText = 'Live: disconnected. Reconnecting…'; setTimeout(connectWS, 1500); };
+        ws.onmessage = (ev) => {
+          try {
+            const data = JSON.parse(ev.data);
+            if(data.type === 'attendance_update'){
+              live.innerText = `Live: Session ${data.session_id} count ${data.student_count}`;
+            } else if (data.type === 'session_start'){
+              live.innerText = `Live: Session ${data.session_id} started`;
+            } else if (data.type === 'session_end'){
+              live.innerText = `Live: Session ${data.session_id} ended`;
+            }
+          } catch(_){ /* ignore non-JSON */ }
+        };
+      }
+      connectWS();
+    </script>
+  </body>
+  </html>
+
+

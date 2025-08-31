@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚂 KCEA Portal - Railway Style Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'railway-blue': '#188CFF',
+                        'railway-teal': '#00BFA6',
+                        'railway-gray': '#F8FAFC',
+                        'railway-dark': '#1F2937'
+                    },
+                    fontFamily: {
+                        'railway': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .railway-card { 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
+            border: 1px solid #E5E7EB; 
+        }
+        .railway-btn { 
+            background: linear-gradient(135deg, #188CFF, #00BFA6); 
+            color: white; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 14px 0 rgba(24, 140, 255, 0.39); 
+            transition: all 0.2s ease-in-out; 
+        }
+        .railway-btn:hover { 
+            box-shadow: 0 6px 20px rgba(24, 140, 255, 0.4); 
+            transform: translateY(-1px); 
+        }
+        .attendance-btn {
+            background: linear-gradient(135deg, #188CFF, #00BFA6);
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(24, 140, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .attendance-btn:hover {
+            box-shadow: 0 12px 35px rgba(24, 140, 255, 0.4);
+            transform: translateY(-2px) scale(1.02);
+        }
+        .kcea-logo-circle {
+            background: linear-gradient(135deg, #188CFF, #00BFA6);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-railway-gray">
+    <!-- Railway-Style Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="kcea-logo-circle">
+                        <span class="font-serif">KCEA</span>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg text-railway-dark">🚂 KCEA Portal</h1>
+                        <p class="text-xs text-gray-600">Railway-Style Attendance System</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-railway-dark hover:text-railway-blue font-medium transition-colors">Home</a>
+                    <a href="#" class="text-railway-dark hover:text-railway-blue font-medium transition-colors">About</a>
+                    <a href="#" class="text-railway-dark hover:text-railway-blue font-medium transition-colors">Departments</a>
+                    <button class="railway-btn px-6 py-2 font-semibold">
+                        Student Portal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Railway Style -->
+    <section class="relative py-20" style="background: linear-gradient(135deg, #188CFF, #00BFA6);">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-5xl lg:text-6xl font-bold leading-tight">
+                        🚂 Welcome to <span class="text-railway-teal">KCEA</span>
+                    </h1>
+                    <h2 class="text-2xl lg:text-3xl font-semibold opacity-90">
+                        Railway-Style Attendance Portal
+                    </h2>
+                    <p class="text-xl opacity-80 leading-relaxed">
+                        Modern • Mobile-First • Smart Attendance System
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 text-sm opacity-90">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>NH-16, 30km from Nizamabad</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>JNTUH Affiliated</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-award"></i>
+                            <span>ISO 9001:2008</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button class="railway-btn px-8 py-4 text-lg font-bold rounded-2xl">
+                            🎓 Student Login
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 text-lg font-bold rounded-2xl hover:bg-white hover:text-railway-blue transition-all">
+                            📚 Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <div class="railway-card p-6">
+                    <img
+                        src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="KCEA Campus"
+                        class="w-full h-64 object-cover rounded-2xl"
+                        onerror="this.src='https://via.placeholder.com/800x400/188CFF/ffffff?text=KCEA+Campus'"
+                    />
+                    <div class="mt-4 text-center">
+                        <h3 class="text-lg font-semibold text-railway-dark">KCEA Campus</h3>
+                        <p class="text-sm text-gray-600">40 Acres of Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Railway-Style Stats -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="railway-card p-6 text-center border-l-4 border-railway-blue">
+                    <div class="text-4xl font-bold text-railway-blue mb-2">2001</div>
+                    <div class="text-gray-600 font-medium">Established</div>
+                </div>
+                <div class="railway-card p-6 text-center border-l-4 border-railway-teal">
+                    <div class="text-4xl font-bold text-railway-teal mb-2">40</div>
+                    <div class="text-gray-600 font-medium">Acres Campus</div>
+                </div>
+                <div class="railway-card p-6 text-center border-l-4 border-green-500">
+                    <div class="text-4xl font-bold text-green-500 mb-2">1500+</div>
+                    <div class="text-gray-600 font-medium">Students Placed</div>
+                </div>
+                <div class="railway-card p-6 text-center border-l-4 border-yellow-500">
+                    <div class="text-4xl font-bold text-yellow-500 mb-2">150+</div>
+                    <div class="text-gray-600 font-medium">Companies</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Dashboard Demo -->
+    <section class="py-20 bg-railway-gray">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-railway-dark mb-4">🚂 Railway-Style Student Dashboard</h2>
+                <p class="text-xl text-gray-600">Clean, Mobile-First Design Inspired by Railway Apps</p>
+            </div>
+
+            <!-- Student Profile Card -->
+            <div class="railway-card p-6 mb-8" style="background: linear-gradient(135deg, #188CFF, #00BFA6); color: white;">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-2xl font-bold">
+                        A
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold">Arjun Reddy</h3>
+                        <p class="opacity-90">20CS001 • CSE • 3rd Year</p>
+                        <p class="text-sm opacity-80">Last Login: Today, 9:30 AM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Section -->
+            <div class="railway-card p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-railway-dark">📊 Attendance Overview</h3>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold text-railway-blue">87%</div>
+                        <div class="text-sm text-gray-600">Overall</div>
+                    </div>
+                </div>
+
+                <!-- One-Tap Attendance Button -->
+                <button class="attendance-btn w-full py-6 text-xl font-bold mb-6">
+                    🎯 Mark Attendance
+                </button>
+
+                <!-- Subject-wise Attendance -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-railway-gray p-4 rounded-xl">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">Data Structures</span>
+                            <span class="text-railway-blue font-bold">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                            <div class="bg-railway-blue h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-railway-gray p-4 rounded-xl">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">Database Systems</span>
+                            <span class="text-railway-teal font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                            <div class="bg-railway-teal h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News & Events -->
+            <div class="railway-card p-6">
+                <h3 class="text-2xl font-bold text-railway-dark mb-6">📢 Latest News</h3>
+                <div class="space-y-4">
+                    <div class="border-l-4 border-railway-blue pl-4">
+                        <h4 class="font-semibold text-railway-dark">First Alumni Meet 2K25</h4>
+                        <p class="text-gray-600 text-sm">Our First Alumni meet 2K25 was a grand success!</p>
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full mt-2">Alumni</span>
+                    </div>
+                    <div class="border-l-4 border-railway-teal pl-4">
+                        <h4 class="font-semibold text-railway-dark">New CSD Department</h4>
+                        <p class="text-gray-600 text-sm">TGCHE approved Computer Science & Data Science with 60 seats!</p>
+                        <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full mt-2">Academic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Bottom Navigation Demo -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 md:hidden">
+        <div class="flex">
+            <a href="#" class="flex-1 flex flex-col items-center justify-center py-2 text-xs font-medium text-railway-blue">
+                <i class="fas fa-home text-lg mb-1"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="flex-1 flex flex-col items-center justify-center py-2 text-xs font-medium text-gray-500">
+                <i class="fas fa-calendar text-lg mb-1"></i>
+                <span>Attendance</span>
+            </a>
+            <a href="#" class="flex-1 flex flex-col items-center justify-center py-2 text-xs font-medium text-gray-500">
+                <i class="fas fa-bell text-lg mb-1"></i>
+                <span>News</span>
+            </a>
+            <a href="#" class="flex-1 flex flex-col items-center justify-center py-2 text-xs font-medium text-gray-500">
+                <i class="fas fa-user text-lg mb-1"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-railway-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="kcea-logo-circle mx-auto mb-4">
+                    <span class="font-serif">KCEA</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">🚂 KCEA Railway Portal</h3>
+                <p class="text-gray-400 mb-4">Modern Attendance System • Railway-Style Design</p>
+                <p class="text-sm text-gray-500">
+                    &copy; 2024 Kshatriya College of Engineering. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Railway-style interactions
+        document.querySelectorAll('.railway-btn, .attendance-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Add ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Attendance button special effect
+        document.querySelector('.attendance-btn').addEventListener('click', function() {
+            this.innerHTML = '✅ Attendance Marked!';
+            this.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+            
+            setTimeout(() => {
+                this.innerHTML = '🎯 Mark Attendance';
+                this.style.background = 'linear-gradient(135deg, #188CFF, #00BFA6)';
+            }, 2000);
+        });
+    </script>
+
+    <style>
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 640px) {
+            .kcea-logo-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            body {
+                padding-bottom: 80px;
+            }
+        }
+    </style>
+</body>
+</html>

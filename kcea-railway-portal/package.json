@@ -1,0 +1,30 @@
+{
+  "name": "kcea-railway-portal",
+  "version": "1.0.0",
+  "description": "Railway-style attendance management system for KCEA",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start": "cd backend && npm start"
+  },
+  "keywords": [
+    "attendance",
+    "kcea",
+    "railway-style",
+    "education",
+    "college"
+  ],
+  "author": "Harshavardhan Ramgir",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HARSHAVARDHANRAMGIR/kcea-railway-portal"
+  }
+}
