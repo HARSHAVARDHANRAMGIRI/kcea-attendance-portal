@@ -1,5 +1,1 @@
-Flask==3.0.3
-Werkzeug==3.0.3
-python-dotenv==1.0.0
-pillow==10.1.0
-cloudinary==1.41.0
+Flask==2.3.3
