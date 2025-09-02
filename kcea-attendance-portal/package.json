@@ -1,0 +1,68 @@
+{
+  "name": "kcea-attendance-portal",
+  "version": "2.0.0",
+  "description": "KCEA Real-time Attendance Portal - Production-ready attendance management system",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-server": "cd backend && npm install",
+    "install-client": "cd frontend && npm install",
+    "install-all": "npm install && npm run install-server && npm run install-client",
+    "start": "cd backend && npm start",
+    "test": "cd backend && npm test && cd ../frontend && npm test",
+    "deploy": "npm run build && npm run start"
+  },
+  "keywords": [
+    "attendance",
+    "portal",
+    "real-time",
+    "education",
+    "KCEA",
+    "socket.io",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": {
+    "name": "Harshavardhan Ramgiri",
+    "email": "r.harsha0541@gmail.com",
+    "company": "AUTOFLOW AGENCY",
+    "role": "Founder & Full-Stack Developer"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HARSHAVARDHANRAMGIRI/kcea-attendance-portal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HARSHAVARDHANRAMGIRI/kcea-attendance-portal/issues",
+    "email": "r.harsha0541@gmail.com"
+  },
+  "homepage": "https://kcea-portal.vercel.app",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "college": {
+    "name": "Kshatriya College of Engineering",
+    "location": "NH-16, 30km from Nizamabad, Telangana",
+    "established": "2001",
+    "affiliation": "JNTUH",
+    "certification": "ISO 9001:2008"
+  },
+  "developer": {
+    "name": "Harshavardhan Ramgiri",
+    "company": "AUTOFLOW AGENCY",
+    "email": "r.harsha0541@gmail.com",
+    "role": "Founder & Full-Stack Developer",
+    "college": "Kshatriya College of Engineering",
+    "department": "Computer Science Engineering",
+    "description": "Passionate about full-stack development, real-time systems, and building innovative educational solutions."
+  }
+}
