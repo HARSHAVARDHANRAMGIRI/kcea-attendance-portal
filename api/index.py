@@ -22,7 +22,7 @@ HOME_TEMPLATE = """
 </head>
 <body>
     <div class="container">
-        <h1>🎓 KCEA Attendance Portal</h1>
+        <h1>🎓 KCEA Attendance Portal - Vercel Deployed</h1>
         <div class="card">
             <h2>Kshatriya College of Engineering</h2>
             <p>Modern Attendance Management System</p>
