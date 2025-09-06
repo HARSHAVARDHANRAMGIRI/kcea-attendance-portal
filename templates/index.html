@@ -1,0 +1,470 @@
+{% extends "base.html" %}
+
+{% block title %}KCEA Attendance Portal - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="logo-section">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <div class="logo-container me-4">
+                            <div class="kcea-logo-large">KCEA</div>
+                        </div>
+                        <div class="text-start">
+                            <h1 class="display-4 fw-bold mb-2">KCEA</h1>
+                            <h2 class="h4 fw-normal mb-0">Attendance Portal</h2>
+                        </div>
+                    </div>
+                    <h3 class="fw-bold mb-2">Kshatriya College of Engineering</h3>
+                    <p class="lead mb-2">Affiliated to JNTUH | AICTE Approved | NAAC 'A' Grade</p>
+                    <p class="mb-4">Digital attendance management system for students and faculty</p>
+                    <div class="d-flex gap-4 justify-content-center flex-wrap">
+                        <a href="{{ url_for('signup') }}" class="btn btn-register btn-hero btn-lg px-5 py-3 shadow-lg text-dark fw-bold" style="font-size: 1.2rem; border-radius: 15px;">
+                            <i class="fas fa-user-plus me-2"></i>REGISTER NOW
+                        </a>
+                        <a href="{{ url_for('login') }}" class="btn btn-login btn-hero btn-lg px-5 py-3 shadow-lg fw-bold" style="font-size: 1.2rem; border-radius: 15px;">
+                            <i class="fas fa-sign-in-alt me-2"></i>STUDENT LOGIN
+                        </a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ url_for('download_app') }}" class="btn btn-outline-light btn-md px-4 shadow me-2">
+                            <i class="fas fa-download me-2"></i>Download App
+                        </a>
+                        <a href="https://kcea.in" target="_blank" class="btn btn-outline-light btn-md px-4 shadow">
+                            <i class="fas fa-globe me-2"></i>Official Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="campus-gallery text-center">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         alt="KCEA Campus Building" class="campus-image img-fluid rounded shadow-lg">
+                    <div class="mt-3">
+                        <h5 class="text-white fw-bold">Welcome to KCEA Campus</h5>
+                        <p class="text-white-50">40 Acres of Excellence in Engineering Education</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5 fw-bold text-dark">Why Choose Our Portal?</h2>
+            <p class="lead text-muted">Modern, secure, and user-friendly attendance management</p>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Mobile Friendly</h5>
+                    <p class="card-text">Access from any device, anywhere. Responsive design for all screen sizes.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Secure & Safe</h5>
+                    <p class="card-text">OTP-based authentication ensures only authorized access to your data.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Real-time Tracking</h5>
+                    <p class="card-text">Instant attendance marking and real-time updates for better management.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- College Info Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="fw-bold text-dark mb-3">About Kshatriya College of Engineering</h3>
+                            <p class="lead text-muted mb-3">
+                                Kshatriya College of Engineering (KCEA) was established in the year 2001 under the aegis of 
+                                <strong>Pandit Deendayal Upadyay Educational Society</strong>. KCEA is located on a sprawling 
+                                <strong>40 acres campus</strong> on the serene NH-16 highway, 30 km away from Nizamabad district.
+                            </p>
+                            <p class="text-muted mb-3">
+                                KCEA is affiliated to the <strong>Jawaharlal Nehru Technology University Hyderabad (JNTUH)</strong> 
+                                offering graduate programs in engineering and postgraduate programs in the streams of Engineering, 
+                                Business Administration, and Polytechnic.
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="text-primary mb-3">Accreditations & Certifications</h5>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check text-success me-2"></i>Affiliated to JNTUH, Hyderabad</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>AICTE Approved</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>ISO 9001:2008 Certified</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>NAAC 'A' Grade</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>NBA Accreditation Ready</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="text-primary mb-3">Campus Statistics</h5>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-graduation-cap text-primary me-2"></i>6 Engineering Branches</li>
+                                        <li><i class="fas fa-users text-primary me-2"></i>1500+ Students Placed</li>
+                                        <li><i class="fas fa-building text-primary me-2"></i>150+ Companies Visited</li>
+                                        <li><i class="fas fa-trophy text-primary me-2"></i>1500+ Alumni Network</li>
+                                        <li><i class="fas fa-map-marker-alt text-primary me-2"></i>40 Acres Campus</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                 alt="KCEA Building" class="img-fluid rounded mb-3">
+                            <h5 class="text-primary">Our Vision</h5>
+                            <p class="text-muted small">"To be the center of excellence in technical education and research"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chairman's Message Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-5">
+                    <div class="row">
+                        <div class="col-12 text-center mb-4">
+                            <h3 class="fw-bold text-dark mb-3">Message from Chairman</h3>
+                            <h5 class="fw-bold text-primary">Aljapur Srinivas Garu</h5>
+                            <p class="text-muted">Chairman, Kshatriya College of Engineering</p>
+                            <div class="d-flex justify-content-center gap-3 mt-3">
+                                <a href="https://kcea.in" target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-globe me-1"></i>Official Website
+                                </a>
+                                <a href="https://kcea.in/contact-us/" target="_blank" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-phone me-1"></i>Contact Us
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted mb-3">
+                                I take great pleasure for being the chairman of this institution. I have a strong desire to uplift 
+                                the standard of living of the people belonging to the rural area. Kshatriya College of Engineering 
+                                (KCEA) has evolved out of that desire.
+                            </p>
+                            <p class="text-muted mb-3">
+                                With clear goal, KCEA is leaping forward to the next decade. We have overcome a lot of obvious hurdles 
+                                which most of the rural engineering colleges in the state are still facing. I am proud to say that 
+                                KCEA was successful in attracting and retaining the faculty from IIT background.
+                            </p>
+                            <p class="text-muted">
+                                KCEA believes in holistic development of the student. Our country requires youth with sound technical 
+                                skills, strong leadership skills and sensible towards human ethics. We have an immediate challenge 
+                                to achieve total quality management of the institution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Why KCEA Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-light">
+                <div class="card-body p-5">
+                    <h3 class="fw-bold text-dark text-center mb-4">Why Choose KCEA?</h3>
+                    <p class="lead text-muted text-center mb-4">
+                        "To be the center of excellence in technical education and research". The Practices and the Culture at 
+                        the Institute has always been to provide Quality Education by enhancing the overall Educational experience 
+                        of Students adopting a wide range of Academic, Practical, Co-Curricular, Extra-Curricular Programs.
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3">
+                            <i class="fas fa-award fa-3x text-primary mb-3"></i>
+                            <h5 class="fw-bold">Quality Education</h5>
+                            <p class="text-muted">State-of-the-art facilities and modern infrastructure</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <i class="fas fa-users fa-3x text-success mb-3"></i>
+                            <h5 class="fw-bold">Experienced Faculty</h5>
+                            <p class="text-muted">IIT background and industry experts</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <i class="fas fa-graduation-cap fa-3x text-warning mb-3"></i>
+                            <h5 class="fw-bold">Holistic Development</h5>
+                            <p class="text-muted">Multi-skilled and multi-tasking personalities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Campus Highlights Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5 fw-bold text-dark">Campus Highlights</h2>
+            <p class="lead text-muted">State-of-the-art facilities and modern infrastructure</p>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-laptop fa-2x text-primary mb-3"></i>
+                    <h6 class="fw-bold">Digital Classrooms</h6>
+                    <p class="small text-muted">Modern teaching facilities</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-book fa-2x text-success mb-3"></i>
+                    <h6 class="fw-bold">Digital Library</h6>
+                    <p class="small text-muted">E-Journals & NPTEL Materials</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-wifi fa-2x text-warning mb-3"></i>
+                    <h6 class="fw-bold">NME-ICT Internet</h6>
+                    <p class="small text-muted">10mbps High-Speed Internet</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-briefcase fa-2x text-info mb-3"></i>
+                    <h6 class="fw-bold">100% Placement</h6>
+                    <p class="small text-muted">Training & Placement Cell</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-users fa-2x text-secondary mb-3"></i>
+                    <h6 class="fw-bold">Professional Chapters</h6>
+                    <p class="small text-muted">Student Professional Bodies</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-industry fa-2x text-danger mb-3"></i>
+                    <h6 class="fw-bold">Industry Visits</h6>
+                    <p class="small text-muted">Real-world exposure</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-home fa-2x text-primary mb-3"></i>
+                    <h6 class="fw-bold">Hostel Facilities</h6>
+                    <p class="small text-muted">Separate for Boys & Girls</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-trophy fa-2x text-success mb-3"></i>
+                    <h6 class="fw-bold">Sports & Games</h6>
+                    <p class="small text-muted">NCC/NSS Activities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Departments Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5 fw-bold text-dark">Engineering Departments</h2>
+            <p class="lead text-muted">Comprehensive technical education across multiple disciplines</p>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4 col-lg-2">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-laptop-code fa-2x text-primary mb-3"></i>
+                    <h6 class="fw-bold">CSE</h6>
+                    <p class="small text-muted">Computer Science Engineering</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-lg-2">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-microchip fa-2x text-success mb-3"></i>
+                    <h6 class="fw-bold">ECE</h6>
+                    <p class="small text-muted">Electronics & Communication</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-lg-2">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-bolt fa-2x text-warning mb-3"></i>
+                    <h6 class="fw-bold">EEE</h6>
+                    <p class="small text-muted">Electrical & Electronics</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-lg-2">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-cogs fa-2x text-info mb-3"></i>
+                    <h6 class="fw-bold">ME</h6>
+                    <p class="small text-muted">Mechanical Engineering</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-lg-2">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-building fa-2x text-secondary mb-3"></i>
+                    <h6 class="fw-bold">CE</h6>
+                    <p class="small text-muted">Civil Engineering</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-lg-2">
+            <div class="card text-center h-100 department-card">
+                <div class="card-body">
+                    <i class="fas fa-database fa-2x text-danger mb-3"></i>
+                    <h6 class="fw-bold">IT</h6>
+                    <p class="small text-muted">Information Technology</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Info Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card contact-card text-white">
+                <div class="card-body p-5">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="fw-bold mb-3">Contact Information</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><i class="fas fa-map-marker-alt me-2"></i>Chepur, Armoor, Nizamabad, Telangana</p>
+                                    <p><i class="fas fa-phone me-2"></i>+91-XXXX-XXXXXX</p>
+                                    <p><i class="fas fa-envelope me-2"></i>info@kcea.in</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><i class="fas fa-globe me-2"></i>www.kcea.in</p>
+                                    <p><i class="fas fa-graduation-cap me-2"></i>JNTUH Affiliated</p>
+                                    <p><i class="fas fa-certificate me-2"></i>ISO 9001:2008 Certified</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <h5 class="fw-bold">Quick Links</h5>
+                            <div class="d-flex flex-column">
+                                <a href="{{ url_for('login') }}" class="text-white text-decoration-none mb-2">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Student Portal
+                                </a>
+                                <a href="{{ url_for('signup') }}" class="text-white text-decoration-none mb-2">
+                                    <i class="fas fa-user-plus me-2"></i>New Registration
+                                </a>
+                                <a href="#" class="text-white text-decoration-none mb-2">
+                                    <i class="fas fa-download me-2"></i>Download App
+                                </a>
+                                <a href="#" class="text-white text-decoration-none">
+                                    <i class="fas fa-question-circle me-2"></i>FAQs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter Section -->
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body p-5 text-center">
+                    <h3 class="fw-bold text-dark mb-3">Subscribe to our Newsletter</h3>
+                    <p class="text-muted mb-4">Monthly digest of what's new and exciting from us.</p>
+                    <form class="row g-3 justify-content-center">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-kcea w-100">
+                                <i class="fas fa-paper-plane me-2"></i>Subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

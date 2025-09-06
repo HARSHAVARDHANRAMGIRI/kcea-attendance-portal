@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}KCEA Attendance Portal{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --kcea-red: #c62828;
+            --kcea-blue: #1565c0;
+            --kcea-dark: #1a1a1a;
+            --kcea-gold: #ff8f00;
+            --kcea-green: #2e7d32;
+            --kcea-purple: #7b1fa2;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--kcea-red) !important;
+        }
+        
+        .btn-kcea {
+            background-color: var(--kcea-red);
+            border-color: var(--kcea-red);
+            color: white;
+        }
+        
+        .btn-kcea:hover {
+            background-color: #b71c1c;
+            border-color: #b71c1c;
+            color: white;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--kcea-red) 0%, var(--kcea-blue) 50%, var(--kcea-gold) 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kcea-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--kcea-blue), var(--kcea-purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .kcea-logo-large {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--kcea-blue), var(--kcea-purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-hero {
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hero:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+        }
+        
+        .btn-register {
+            background: linear-gradient(135deg, #ffc107, #ff8f00) !important;
+            border: none !important;
+        }
+        
+        .btn-register:hover {
+            background: linear-gradient(135deg, #ff8f00, #ff6f00) !important;
+            color: white !important;
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa) !important;
+            border: 2px solid rgba(255,255,255,0.3) !important;
+        }
+        
+        .btn-login:hover {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+            color: var(--kcea-blue) !important;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .footer {
+            background-color: var(--kcea-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .college-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 20px;
+        }
+        
+        .campus-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .campus-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .campus-gallery img {
+            transition: transform 0.3s ease;
+        }
+        
+        .campus-gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .department-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .department-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--kcea-blue);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-left: 4px solid var(--kcea-red);
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, var(--kcea-blue) 0%, var(--kcea-purple) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+                <div class="logo-container me-2">
+                    <div class="kcea-logo">KCEA</div>
+                </div>
+                <div>
+                    <div class="fw-bold text-primary mb-0">KCEA</div>
+                    <small class="text-muted">Attendance Portal</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://kcea.in" target="_blank">
+                            <i class="fas fa-globe me-1"></i>Official Website
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('download_app') }}">
+                            <i class="fas fa-download me-1"></i>Download App
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://kcea.in/contact-us/" target="_blank">
+                            <i class="fas fa-phone me-1"></i>Contact
+                        </a>
+                    </li>
+                    {% if session.user_id %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                                <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                            </a>
+                        </li>
+                        {% if session.user_role == 'admin' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('admin_dashboard') }}">
+                                <i class="fas fa-crown me-1"></i>Admin Panel
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">
+                                <i class="fas fa-sign-out-alt me-1"></i>Logout
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Student Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('signup') }}">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Kshatriya College of Engineering</h5>
+                    <p class="mb-0">Chepur, Armoor, Nizamabad, Telangana</p>
+                    <p class="mb-0">Affiliated to JNTUH | AICTE Approved | NAAC 'A' Grade</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">© 2024 KCEA Attendance Portal</p>
+                    <p class="mb-0">Developed by <strong>HARSHAVARDHAN RAMGIRI</strong></p>
+                    <p class="mb-0">r.harsha0541@gmail.com | AUTOFLOW AGENCY</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

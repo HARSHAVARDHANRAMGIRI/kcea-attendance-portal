@@ -1,89 +1,526 @@
-Request ID: d598fad4-299f-4781-8990-f731affb6596
-ConnectError: [aborted] read ECONNRESET
-    at rol.$endAiConnectTransportReportError (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:4869:318559)
-    at tgr._doInvokeHandler (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:211942)
-    at tgr._invokeHandler (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:211684)
-    at tgr._receiveRequest (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:210449)
-    at tgr._receiveOneMessage (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:209271)
-    at M_t.value (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:207365)
-    at we._deliver (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:49:2962)
-    at we.fire (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:49:3283)
-    at Rrt.fire (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:4856:12154)
-    at MessagePort.<anonymous> (vscode-file://vscode-app/c:/Users/rhars/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:7036:18168){% extends 'layout.html' %}
+{% extends "base.html" %}
+
+{% block title %}Dashboard - KCEA Attendance Portal{% endblock %}
+
 {% block content %}
-<div class="row g-3">
-  <div class="col-12">
-    <div class="p-4 rounded hero d-flex align-items-center justify-content-between">
-      <div>
-        <h3 class="mb-1">Welcome, {{ student[0] }}</h3>
-        <div class="opacity-75">Roll No: <strong>{{ student[1] }}</strong> • Branch: <strong>{{ student[2] }}</strong></div>
-        <div class="opacity-75">Email: {{ student[3] }}</div>
-      </div>
-      {% if student[4] %}
-      <img src="{{ student[4] }}" class="rounded" style="height:80px;width:80px;object-fit:cover;border:2px solid #fff" />
-      {% endif %}
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <div class="d-flex align-items-center justify-content-between">
-          <div>
-            <div class="text-muted">Attendance %</div>
-            <div class="fs-2 fw-bold">{{ percent }}%</div>
-          </div>
-          <button id="markBtn" class="btn btn-success" onclick="markAttendance()">Mark Attendance Now</button>
+<div class="container mt-4">
+    <!-- Welcome Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold text-dark mb-2">Welcome, {{ user[2] }}!</h2>
+                            <p class="text-muted mb-0">
+                                <i class="fas fa-id-card me-2"></i>{{ user[1] }} | 
+                                <i class="fas fa-graduation-cap me-2"></i>{{ user[5] }} | 
+                                <i class="fas fa-calendar me-2"></i>Semester {{ user[6] }}
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <div class="d-flex justify-content-md-end">
+                                <button class="btn btn-kcea btn-lg" onclick="showAttendanceModal()">
+                                    <i class="fas fa-check-circle me-2"></i>Mark Attendance
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-text mt-2">Auto records date, time and day.</div>
-      </div>
     </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h5 class="mb-3">Recent Attendance</h5>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Day</th>
-              </tr>
-            </thead>
-            <tbody id="rows">
-              {% for r in records %}
-              <tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2] }}</td></tr>
-              {% endfor %}
-            </tbody>
-          </table>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-percentage fa-2x text-success mb-2"></i>
+                    <h4 class="fw-bold text-success">{{ attendance_percentage }}%</h4>
+                    <p class="text-muted mb-0">Overall Attendance</p>
+                    <div class="progress mt-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: {{ attendance_percentage }}%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-calendar-check fa-2x text-primary mb-2"></i>
+                    <h4 class="fw-bold text-primary" id="monthly-attendance">--</h4>
+                    <p class="text-muted mb-0">This Month</p>
+                    <small class="text-muted" id="month-name"></small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-calendar-alt fa-2x text-info mb-2"></i>
+                    <h4 class="fw-bold text-info">{{ attendance_records|length }}</h4>
+                    <p class="text-muted mb-0">Total Days</p>
+                    <small class="text-muted">This semester</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-2x text-warning mb-2"></i>
+                    <h4 class="fw-bold text-warning" id="current-time">--:--</h4>
+                    <p class="text-muted mb-0">Current Time</p>
+                    <small class="text-muted" id="current-date"></small>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <!-- Class Schedule -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold mb-0">
+                        <i class="fas fa-clock me-2"></i>Today's Class Schedule
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="class-schedule">
+                        <!-- Class periods will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Attendance Chart -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold mb-0">
+                        <i class="fas fa-chart-line me-2"></i>Monthly Attendance Tracking
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <canvas id="attendanceChart" width="400" height="200"></canvas>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold text-primary mb-3">Attendance Summary</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Present Days:</span>
+                                    <span class="fw-bold text-success" id="present-days">0</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Absent Days:</span>
+                                    <span class="fw-bold text-danger" id="absent-days">0</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Total Days:</span>
+                                    <span class="fw-bold text-primary" id="total-days">0</span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <h6 class="fw-bold text-primary mb-2">Quick Actions</h6>
+                                <button class="btn btn-outline-primary btn-sm w-100 mb-2" onclick="exportAttendance()">
+                                    <i class="fas fa-download me-1"></i>Export Report
+                                </button>
+                                <button class="btn btn-outline-success btn-sm w-100" onclick="viewHistory()">
+                                    <i class="fas fa-history me-1"></i>View History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attendance History -->
+    <div class="row" id="attendance-history">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold mb-0">
+                        <i class="fas fa-history me-2"></i>Recent Attendance Records
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if attendance_records %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for record in attendance_records %}
+                                    <tr>
+                                        <td>{{ record[0] }}</td>
+                                        <td>{{ record[1] }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ 'success' if record[2] == 'present' else 'danger' }}">
+                                                {{ record[2].title() }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <i class="fas fa-{{ 'check-circle text-success' if record[2] == 'present' else 'times-circle text-danger' }}"></i>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No attendance records found</h5>
+                            <p class="text-muted">Mark your first attendance to get started!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle me-2"></i>Success!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                <h5>Attendance Marked Successfully!</h5>
+                <p class="text-muted">Your attendance has been recorded for today.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-circle me-2"></i>Error!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fas fa-exclamation-circle fa-3x text-danger mb-3"></i>
+                <h5 id="error-title">Something went wrong!</h5>
+                <p class="text-muted" id="error-message">Please try again later.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Attendance Modal -->
+<div class="modal fade" id="attendanceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle me-2"></i>Mark Attendance
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="period-select" class="form-label">Select Period</label>
+                    <select class="form-select" id="period-select">
+                        <option value="">Choose a period...</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="subject-input" class="form-label">Subject (Optional)</label>
+                    <input type="text" class="form-control" id="subject-input" placeholder="Enter subject name">
+                </div>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span id="period-info">Select a period to see timing information</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="markAttendance()">
+                    <i class="fas fa-check me-2"></i>Mark Attendance
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-async function markAttendance(){
-  const btn = document.getElementById('markBtn');
-  btn.disabled = true; btn.textContent = 'Marking...';
-  const res = await fetch('/api/attendance/mark', { method:'POST' });
-  btn.disabled = false; btn.textContent = 'Mark Attendance Now';
-  const data = await res.json();
-  if(data.ok){
-    // refresh recent entries dynamically
+// Update current time
+function updateTime() {
     const now = new Date();
-    const tr = document.createElement('tr');
-    const date = now.toISOString().slice(0,10);
-    const time = now.toTimeString().slice(0,8);
-    const day = now.toLocaleDateString(undefined, { weekday: 'long' });
-    tr.innerHTML = `<td>${date}</td><td>${time}</td><td>${day}</td>`;
-    const rows = document.getElementById('rows');
-    rows.prepend(tr);
-  } else {
-    alert('Failed to mark attendance');
-  }
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    const dateString = now.toLocaleDateString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+    const monthName = now.toLocaleDateString('en-US', { month: 'long' });
+    
+    document.getElementById('current-time').textContent = timeString;
+    document.getElementById('current-date').textContent = dateString;
+    document.getElementById('month-name').textContent = monthName;
+}
+
+// Calculate monthly attendance
+function calculateMonthlyAttendance() {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    
+    // Mock data for demonstration - in real app, this would come from backend
+    const monthlyData = {
+        present: Math.floor(Math.random() * 20) + 10, // 10-30 days
+        absent: Math.floor(Math.random() * 5) + 1,    // 1-6 days
+        total: 0
+    };
+    monthlyData.total = monthlyData.present + monthlyData.absent;
+    
+    document.getElementById('monthly-attendance').textContent = monthlyData.present;
+    document.getElementById('present-days').textContent = monthlyData.present;
+    document.getElementById('absent-days').textContent = monthlyData.absent;
+    document.getElementById('total-days').textContent = monthlyData.total;
+    
+    return monthlyData;
+}
+
+// Create attendance chart
+function createAttendanceChart() {
+    const ctx = document.getElementById('attendanceChart').getContext('2d');
+    const monthlyData = calculateMonthlyAttendance();
+    
+    // Generate last 6 months data
+    const months = [];
+    const attendanceData = [];
+    const now = new Date();
+    
+    for (let i = 5; i >= 0; i--) {
+        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        months.push(date.toLocaleDateString('en-US', { month: 'short' }));
+        attendanceData.push(Math.floor(Math.random() * 30) + 70); // 70-100% attendance
+    }
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Attendance %',
+                data: attendanceData,
+                borderColor: '#1565c0',
+                backgroundColor: 'rgba(21, 101, 192, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+updateTime();
+
+// Initialize chart and load class schedule when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    createAttendanceChart();
+    loadClassSchedule();
+    loadPeriods();
+});
+
+// Export attendance function
+function exportAttendance() {
+    alert('Export feature will be available soon!');
+}
+
+// View history function
+function viewHistory() {
+    document.getElementById('attendance-history').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Load class schedule
+async function loadClassSchedule() {
+    try {
+        const response = await fetch('/api/current-period');
+        const data = await response.json();
+        
+        const scheduleContainer = document.getElementById('class-schedule');
+        scheduleContainer.innerHTML = '';
+        
+        data.all_periods.forEach(period => {
+            const periodCard = document.createElement('div');
+            periodCard.className = 'col-md-4 mb-3';
+            
+            const isCurrent = data.current_period && data.current_period.period_number === period.period_number;
+            const cardClass = isCurrent ? 'border-primary bg-light' : 'border-secondary';
+            
+            periodCard.innerHTML = `
+                <div class="card ${cardClass}">
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold ${isCurrent ? 'text-primary' : 'text-muted'}">
+                            ${period.is_lunch ? '🍽️' : '📚'} ${period.subject}
+                        </h6>
+                        <p class="mb-1 small">${period.start_time} - ${period.end_time}</p>
+                        ${isCurrent ? '<span class="badge bg-primary">Current</span>' : ''}
+                    </div>
+                </div>
+            `;
+            
+            scheduleContainer.appendChild(periodCard);
+        });
+    } catch (error) {
+        console.error('Error loading class schedule:', error);
+    }
+}
+
+// Load periods for attendance modal
+async function loadPeriods() {
+    try {
+        const response = await fetch('/api/current-period');
+        const data = await response.json();
+        
+        const periodSelect = document.getElementById('period-select');
+        periodSelect.innerHTML = '<option value="">Choose a period...</option>';
+        
+        data.all_periods.forEach(period => {
+            if (!period.is_lunch) {
+                const option = document.createElement('option');
+                option.value = period.period_number;
+                option.textContent = `Period ${period.period_number} (${period.start_time} - ${period.end_time})`;
+                periodSelect.appendChild(option);
+            }
+        });
+        
+        // Add event listener for period selection
+        periodSelect.addEventListener('change', function() {
+            const selectedPeriod = data.all_periods.find(p => p.period_number == this.value);
+            if (selectedPeriod) {
+                document.getElementById('period-info').textContent = 
+                    `${selectedPeriod.subject} - ${selectedPeriod.start_time} to ${selectedPeriod.end_time}`;
+            } else {
+                document.getElementById('period-info').textContent = 'Select a period to see timing information';
+            }
+        });
+    } catch (error) {
+        console.error('Error loading periods:', error);
+    }
+}
+
+// Show attendance modal
+function showAttendanceModal() {
+    const modal = new bootstrap.Modal(document.getElementById('attendanceModal'));
+    modal.show();
+}
+
+// Mark attendance function
+async function markAttendance() {
+    const periodSelect = document.getElementById('period-select');
+    const subjectInput = document.getElementById('subject-input');
+    
+    if (!periodSelect.value) {
+        alert('Please select a period');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/mark-attendance', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                period: parseInt(periodSelect.value),
+                subject: subjectInput.value
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success modal
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Close attendance modal
+            const attendanceModal = bootstrap.Modal.getInstance(document.getElementById('attendanceModal'));
+            attendanceModal.hide();
+            
+            // Reload page after 2 seconds
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            // Show error modal
+            document.getElementById('error-title').textContent = 'Cannot Mark Attendance';
+            document.getElementById('error-message').textContent = data.message;
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('error-title').textContent = 'Network Error';
+        document.getElementById('error-message').textContent = 'Please check your internet connection and try again.';
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+    }
 }
 </script>
 {% endblock %}
-
-

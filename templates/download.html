@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Download App - KCEA Attendance Portal{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card mt-5">
+                <div class="card-body p-5 text-center">
+                    <div class="logo-container mb-4">
+                        <div class="kcea-logo-large">KCEA</div>
+                    </div>
+                    
+                    <h2 class="fw-bold text-primary mb-3">Download KCEA App</h2>
+                    <p class="text-muted mb-4">Get your personal KCEA Attendance Portal app for offline access</p>
+                    
+                    <!-- Download Button -->
+                    <div class="mb-4">
+                        <a href="{{ url_for('download_app_file') }}" class="btn btn-success btn-lg px-5 py-3 shadow-lg fw-bold" style="font-size: 1.2rem; border-radius: 15px;">
+                            <i class="fas fa-download me-2"></i>DOWNLOAD APP
+                        </a>
+                    </div>
+                    
+                    <!-- Features -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="fw-bold text-primary mb-3">📱 App Features</h5>
+                            <div class="row text-start">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Offline Access</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Quick Portal Link</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Contact Information</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Mobile Friendly</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>No Installation</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Always Updated</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="alert alert-info">
+                        <h6 class="fw-bold mb-2">📋 How to Use:</h6>
+                        <ol class="text-start mb-0">
+                            <li>Click "DOWNLOAD APP" button above</li>
+                            <li>Save the HTML file to your device</li>
+                            <li>Double-click the file to open it</li>
+                            <li>Use the "Open Online Portal" button to access the full portal</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Alternative Access -->
+                    <div class="mt-4">
+                        <h6 class="fw-bold text-primary mb-3">🌐 Alternative Access</h6>
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-home me-1"></i>Portal Home
+                            </a>
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-success">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                            <a href="{{ url_for('signup') }}" class="btn btn-outline-warning">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Developer Info -->
+                    <div class="mt-4 pt-3 border-top">
+                        <p class="text-muted small mb-0">
+                            <i class="fas fa-code me-1"></i>
+                            Developed by <strong>Harshavardhan Ramgiri</strong><br>
+                            <i class="fas fa-envelope me-1"></i>
+                            Email: r.harsha0541@gmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

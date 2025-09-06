@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - KCEA Attendance Portal{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold text-primary">
+                    <i class="fas fa-crown me-2"></i>Admin Dashboard
+                </h2>
+                <div class="text-muted">
+                    Welcome, {{ session.user_name }}!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                    <h4 class="fw-bold text-primary">{{ total_students }}</h4>
+                    <p class="text-muted mb-0">Total Students</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-calendar-check fa-2x text-success mb-2"></i>
+                    <h4 class="fw-bold text-success">{{ total_attendance }}</h4>
+                    <p class="text-muted mb-0">Total Attendance</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-2x text-warning mb-2"></i>
+                    <h4 class="fw-bold text-warning" id="current-time">--:--</h4>
+                    <p class="text-muted mb-0">Current Time</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-center stats-card">
+                <div class="card-body">
+                    <i class="fas fa-graduation-cap fa-2x text-info mb-2"></i>
+                    <h4 class="fw-bold text-info">KCEA</h4>
+                    <p class="text-muted mb-0">College Portal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold mb-0">
+                        <i class="fas fa-tools me-2"></i>Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('admin_users') }}" class="btn btn-primary w-100">
+                                <i class="fas fa-users me-2"></i>Manage Users
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <button class="btn btn-success w-100" onclick="exportData()">
+                                <i class="fas fa-download me-2"></i>Export Data
+                            </button>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <button class="btn btn-info w-100" onclick="viewReports()">
+                                <i class="fas fa-chart-bar me-2"></i>View Reports
+                            </button>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('index') }}" class="btn btn-warning w-100">
+                                <i class="fas fa-home me-2"></i>Go to Portal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold mb-0">
+                        <i class="fas fa-history me-2"></i>Recent Attendance Activity
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if recent_attendance %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Roll No</th>
+                                    <th>Date</th>
+                                    <th>Period</th>
+                                    <th>Time</th>
+                                    <th>Subject</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for record in recent_attendance %}
+                                <tr>
+                                    <td>{{ record[0] }}</td>
+                                    <td>{{ record[1] }}</td>
+                                    <td>{{ record[2] }}</td>
+                                    <td>{{ record[3] }}</td>
+                                    <td>{{ record[4] }}</td>
+                                    <td>{{ record[5] or 'N/A' }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                        <p>No attendance records found</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="fw-bold mb-0">
+                        <i class="fas fa-info-circle me-2"></i>System Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-primary">KCEA Attendance Portal</h6>
+                        <p class="text-muted small mb-0">Version 1.0</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-success">Features</h6>
+                        <ul class="list-unstyled small text-muted">
+                            <li><i class="fas fa-check text-success me-1"></i> Student Registration</li>
+                            <li><i class="fas fa-check text-success me-1"></i> Period-based Attendance</li>
+                            <li><i class="fas fa-check text-success me-1"></i> Real-time Tracking</li>
+                            <li><i class="fas fa-check text-success me-1"></i> Admin Management</li>
+                            <li><i class="fas fa-check text-success me-1"></i> Free for All Users</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-warning">Admin Access</h6>
+                        <p class="text-muted small mb-0">
+                            <strong>Email:</strong> r.harsha0541@gmail.com<br>
+                            <strong>Role:</strong> System Administrator
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Update current time
+function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    document.getElementById('current-time').textContent = timeString;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+updateTime();
+
+// Export data function
+function exportData() {
+    alert('Export feature will be available soon!');
+}
+
+// View reports function
+function viewReports() {
+    alert('Reports feature will be available soon!');
+}
+</script>
+{% endblock %}
